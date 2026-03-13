@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bf5cb14jkt8l3"]
+
+[ext_resource type="Script" uid="uid://dcidwjgye1xc4" path="res://entities/player/champion/champion.gd" id="1_dkvhq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ncnxs"]
+
+[node name="Champion" type="CharacterBody3D" unique_id=1934882278]
+script = ExtResource("1_dkvhq")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=380219967]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2075834009]
+shape = SubResource("CapsuleShape3D_ncnxs")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=1813583608]
+transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=1671192929]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
+
+[node name="DashDurationTimer" type="Timer" parent="." unique_id=1225143850]
