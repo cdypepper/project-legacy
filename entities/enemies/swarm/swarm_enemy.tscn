@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dacpnlm5j6snt"]
+
+[ext_resource type="Script" uid="uid://dqttvpmcudosw" path="res://swarm_enemy.gd" id="1_8li41"]
+[ext_resource type="PackedScene" uid="uid://bgi3tco65o2m" path="res://systems/combat/hurtbox_component.tscn" id="2_6q0p4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cs3dw"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_eolbs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8li41"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6tlll"]
+
+[node name="SwarmEnemy" type="CharacterBody3D" unique_id=1897046631]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_8li41")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1567330684]
+shape = SubResource("CapsuleShape3D_cs3dw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2106041364]
+mesh = SubResource("CapsuleMesh_eolbs")
+surface_material_override/0 = SubResource("StandardMaterial3D_8li41")
+
+[node name="HurtboxComponent" parent="." unique_id=367076147 instance=ExtResource("2_6q0p4")]
+collision_layer = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent" unique_id=545873339]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_6tlll")

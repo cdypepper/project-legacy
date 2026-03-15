@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_y2qnk"]
 [ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="3_441y0"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_0gw80"]
+[ext_resource type="PackedScene" uid="uid://dacpnlm5j6snt" path="res://entities/enemies/swarm/swarm_enemy.tscn" id="5_441y0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mm3j4"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -88,3 +89,31 @@ spring_length = 20.0
 align_transform_with_view = Callable()
 align_position_with_view = Callable()
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="SwarmEnemy" parent="." unique_id=1897046631 node_paths=PackedStringArray("target") instance=ExtResource("5_441y0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.100782, 1.5, -8.2264)
+target = NodePath("../Champion")
+
+[node name="SwarmEnemy2" parent="." unique_id=926195331 node_paths=PackedStringArray("target") instance=ExtResource("5_441y0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.044207, 1.5000019, 8.062699)
+target = NodePath("../Champion")
+
+[node name="SwarmEnemy3" parent="." unique_id=2124120843 node_paths=PackedStringArray("target") instance=ExtResource("5_441y0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.633418, 1.5, -4.7751274)
+target = NodePath("../Champion")
+
+[node name="SwarmEnemy4" parent="." unique_id=842927148 node_paths=PackedStringArray("target") instance=ExtResource("5_441y0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4492167, 1.5, -7.995304)
+target = NodePath("../Champion")
+
+[node name="SwarmEnemy5" parent="." unique_id=927760759 node_paths=PackedStringArray("target") instance=ExtResource("5_441y0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.457682, 1.5, -0.21061516)
+target = NodePath("../Champion")
+
+[node name="SwarmEnemy6" parent="." unique_id=1937714291 node_paths=PackedStringArray("target") instance=ExtResource("5_441y0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.092703, 1.5000019, 3.2393541)
+target = NodePath("../Champion")
+
+[node name="SwarmEnemy7" parent="." unique_id=1842098191 node_paths=PackedStringArray("target") instance=ExtResource("5_441y0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8646744, 1.5, 6.9677773)
+target = NodePath("../Champion")
