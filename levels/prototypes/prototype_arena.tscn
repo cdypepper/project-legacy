@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://b3h7oyhphc7my"]
 
 [ext_resource type="PackedScene" uid="uid://bf5cb14jkt8l3" path="res://entities/player/champion/champion.tscn" id="1_uw8en"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_y2qnk"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="3_441y0"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_0gw80"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mm3j4"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -14,6 +17,9 @@ background_mode = 2
 sky = SubResource("Sky_uw8en")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="Resource" id="Resource_8cddm"]
+script = ExtResource("4_0gw80")
 
 [node name="PrototypeArena" type="Node3D" unique_id=2080585794]
 
@@ -56,3 +62,29 @@ size = Vector3(30, 4, 1)
 
 [node name="Champion" parent="." unique_id=1934882278 instance=ExtResource("1_uw8en")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1755380757]
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 16.820889, 12.855753)
+top_level = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D" unique_id=424057994]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_y2qnk")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="PhantomCamera3D" type="Node3D" parent="." unique_id=155462474 node_paths=PackedStringArray("follow_target")]
+transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 16.820889, 12.855753)
+top_level = true
+script = ExtResource("3_441y0")
+follow_mode = 5
+follow_target = NodePath("../Champion")
+tween_resource = SubResource("Resource_8cddm")
+follow_damping = true
+follow_damping_value = Vector3(0.3, 0.3, 0.3)
+follow_distance = 20.0
+spring_length = 20.0
+align_transform_with_view = Callable()
+align_position_with_view = Callable()
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"

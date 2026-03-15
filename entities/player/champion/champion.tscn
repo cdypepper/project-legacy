@@ -1,8 +1,76 @@
 [gd_scene format=3 uid="uid://bf5cb14jkt8l3"]
 
 [ext_resource type="Script" uid="uid://dcidwjgye1xc4" path="res://entities/player/champion/champion.gd" id="1_dkvhq"]
+[ext_resource type="PackedScene" uid="uid://c2esjs72vhbdg" path="res://systems/combat/hitbox_component.tscn" id="2_5u6yl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ncnxs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_g472q"]
+size = Vector3(0.2, 0.2, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ae0by"]
+size = Vector3(0.2, 0.2, 1.5)
+
+[sub_resource type="Animation" id="Animation_r5cwg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponPivot/WeaponMesh/HitboxComponent/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_pdvui"]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -2.0943952, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponPivot/WeaponMesh/HitboxComponent/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8muje"]
+_data = {
+&"RESET": SubResource("Animation_r5cwg"),
+&"attack": SubResource("Animation_pdvui")
+}
 
 [node name="Champion" type="CharacterBody3D" unique_id=1934882278]
 collision_layer = 2
@@ -14,10 +82,21 @@ script = ExtResource("1_dkvhq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2075834009]
 shape = SubResource("CapsuleShape3D_ncnxs")
 
-[node name="CameraPivot" type="Node3D" parent="." unique_id=1813583608]
-transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 0, 0)
-
-[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=1671192929]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
-
 [node name="DashDurationTimer" type="Timer" parent="." unique_id=1225143850]
+
+[node name="DashCooldownTimer" type="Timer" parent="." unique_id=279808421]
+
+[node name="WeaponPivot" type="Node3D" parent="." unique_id=1581812243]
+
+[node name="WeaponMesh" type="MeshInstance3D" parent="WeaponPivot" unique_id=1252310178]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = SubResource("BoxMesh_g472q")
+
+[node name="HitboxComponent" parent="WeaponPivot/WeaponMesh" unique_id=1424544954 instance=ExtResource("2_5u6yl")]
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponPivot/WeaponMesh/HitboxComponent" unique_id=495590378]
+shape = SubResource("BoxShape3D_ae0by")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1589689337]
+libraries/ = SubResource("AnimationLibrary_8muje")
